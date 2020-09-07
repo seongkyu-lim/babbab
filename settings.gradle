@@ -1,0 +1,3 @@
+rootProject.name = 'babbab'
+
+include 'babbab-api'
