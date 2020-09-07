@@ -1,9 +1,12 @@
 package kr.co.limseongkyu.babbab.interfaces;
 
+import kr.co.limseongkyu.babbab.domain.RestaurantRepository;
+import kr.co.limseongkyu.babbab.domain.RestaurantRepositoryImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -19,6 +22,9 @@ class RestaurantControllerTests {
     @Autowired
     private MockMvc mvc;
 
+    @SpyBean(RestaurantRepositoryImpl.class)
+    private RestaurantRepository restaurantRepository;
+
     @Test
     public void list() throws Exception {
         mvc.perform(get("/restaurants"))
@@ -29,7 +35,6 @@ class RestaurantControllerTests {
                 .andExpect(content().string(
                 containsString("\"name\":\"Bob zip\"")
                 ));
-
     }
 
     @Test
